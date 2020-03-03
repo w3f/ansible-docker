@@ -8,4 +8,4 @@ RUN apt-get update && apt install -y apt-transport-https ca-certificates gnupg g
 RUN apt-get install -y python-pip ansible
 RUN pip install packet-python
 
-COPY ./config/ .
+COPY ./config/ scripts
