@@ -1,37 +1,21 @@
-version: 2
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
 
 jobs:
-  buildImage:
-    docker:
-      - image: web3f/ci-commons:v1.7.2
+  build-and-test:
+    executor: python/default
     steps:
       - checkout
-      - setup_remote_docker
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
       - run:
-          command: |
-            /scripts/build-image.sh web3f/ansible .
-  publishImage:
-    docker:
-      - image: web3f/ci-commons:v1.7.2
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          command: |
-            /scripts/publish-image.sh web3f/ansible
+          command: ./manage.py test
+          name: Test
+
 workflows:
-  version: 2
-  test_and_deploy:
+  main:
     jobs:
-      - buildImage:
-          filters:
-            tags:
-              only: /.*/
-      - publishImage:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/
-          requires:
-            - buildImage
+      - build-and-test
