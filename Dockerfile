@@ -7,5 +7,5 @@ RUN apt-get update && apt install -y apt-transport-https ca-certificates gnupg g
 
 RUN apt-get install -y python-pip ansible bc
 RUN pip install packet-python
-
+RUN mkdir /root/.ssh
 COPY ./config/ scripts
