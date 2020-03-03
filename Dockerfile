@@ -5,7 +5,7 @@ RUN apt-get update && apt install -y apt-transport-https ca-certificates gnupg g
   && apt-add-repository ppa:ansible/ansible \
   && apt-get update
 
-RUN apt-get install -y python-pip ansible
+RUN apt-get install -y python-pip ansible bc
 RUN pip install packet-python
 
 COPY ./config/ scripts
