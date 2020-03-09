@@ -6,6 +6,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-h
   && apt-get update
 
 RUN apt-get install -y --no-install-recommends ansible
-RUN pip install packet-python
+RUN pip install packet-python google-auth
 RUN mkdir /root/.ssh
 COPY ./config/ scripts
