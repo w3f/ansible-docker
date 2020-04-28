@@ -3,7 +3,7 @@ version: 2
 jobs:
   buildImage:
     docker:
-      - image: web3f/ci-commons:v1.8.1
+      - image: web3f/ci-commons:v2.1.0
     steps:
       - checkout
       - setup_remote_docker
@@ -12,7 +12,7 @@ jobs:
             /scripts/build-image.sh web3f/ansible .
   publishImage:
     docker:
-      - image: web3f/ci-commons:v2.0.1
+      - image: web3f/ci-commons:v2.1.0
     steps:
       - checkout
       - setup_remote_docker
