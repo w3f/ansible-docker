@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
-ARG DEBIAN_FRONTEND=noninteractive
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOCKER_VERSION=18.06.3
+
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
     ansible \
@@ -27,4 +30,9 @@ RUN apt-get update && \
     flake8 \
     lint \
     molecule \
-    testinfra
+    testinfra && \
+  wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}-ce.tgz && \
+  tar zxfv docker-${DOCKER_VERSION}-ce.tgz && \
+  chmod a+x ./docker/docker && \
+  mv ./docker/docker /usr/local/bin && \
+  rm -rf ./docker docker-${DOCKER_VERSION}-ce.tgz
